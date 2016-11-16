@@ -9,7 +9,7 @@ module Shapes(
 -- Utilities
 
 data Vector = Vector Double Double
-              deriving Show
+              deriving (Show,Read)
 vector = Vector
 
 cross :: Vector -> Vector -> Double
@@ -24,7 +24,7 @@ invert (Matrix (Vector a b) (Vector c d)) = matrix (d / k) (-b / k) (-c / k) (a 
         
 -- 2x2 square matrices are all we need.
 data Matrix = Matrix Vector Vector
-              deriving Show
+              deriving (Show, Read)
 
 matrix :: Double -> Double -> Double -> Double -> Matrix
 matrix a b c d = Matrix (Vector a b) (Vector c d)
@@ -43,7 +43,7 @@ point = vector
 data Shape = Empty 
            | Circle 
            | Square
-             deriving Show
+             deriving (Show,Read)
 
 empty, circle, square :: Shape
 
@@ -58,7 +58,7 @@ data Transform = Identity
            | Scale Vector
            | Compose Transform Transform
            | Rotate Matrix
-             deriving Show
+             deriving (Show, Read)
 
 identity = Identity
 translate = Translate
@@ -78,7 +78,7 @@ transform (Compose t1 t2)            p = transform t2 $ transform t1 p
 data Colour = Red
             | Green
             | Blue
-              deriving Show
+              deriving (Read)
 
 red, green, blue :: Colour
 
@@ -86,11 +86,16 @@ red = Red
 green = Green
 blue = Blue
 
+instance Show Colour where
+  show Red = "red"
+  show Green = "green"
+  show Blue = "blue"
+
 -- Style
 -- Stroke width, Fill colour and Stroke colour
 
 data Style = Style Double Colour Colour
-              deriving Show
+              deriving (Read,Show)
 
 style = Style
 

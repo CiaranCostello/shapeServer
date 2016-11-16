@@ -24,12 +24,7 @@ attributeParse :: S.Svg -> (Style, Transform) -> S.Svg
 attributeParse svg (s, t) = styleParse (transformParse svg t) s
 
 styleParse :: S.Svg -> Style -> S.Svg
-styleParse svg (Style strW fillCol strCol) = svg ! A.fill (colourAttribute fillCol) ! A.strokeWidth (S.stringValue $ show strW) ! A.stroke (colourAttribute strCol)
-
-colourAttribute :: Colour -> S.AttributeValue
-colourAttribute Red = S.stringValue "red"
-colourAttribute Green = "green"
-colourAttribute Blue = "blue"
+styleParse svg (Style strW fillCol strCol) = svg ! A.fill (S.stringValue $ show fillCol) ! A.strokeWidth (S.stringValue $ show strW) ! A.stroke (S.stringValue $ show strCol)
 
 transformParse :: S.Svg -> Transform -> S.Svg
 transformParse s _ = s

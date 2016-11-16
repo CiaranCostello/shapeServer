@@ -22,6 +22,7 @@ executable scotty-example1
                      , blaze-svg
                      , scotty
                      , text
+                     , wai-extra
   other-modules:      Shapes
                       , Render
                       , Ansi
