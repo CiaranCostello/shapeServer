@@ -1,9 +1,8 @@
 module Shapes(
   Shape(..), Point(..), Vector(..), Style(..), Drawing(..), Colour(..),
   point, getX, getY,
-  empty, circle, square,
-  inside)  where
-
+  empty, circle, square)  where
+import Transform
 
 -- Utilities
 
@@ -85,25 +84,3 @@ style = Style
 -- Drawings
 
 type Drawing = [(Transform,Shape,Style)]
-
--- interpretation function for drawings
-
-inside :: Point -> Drawing -> Bool
-inside p d = or $ map (inside1 p) d
-
-inside1 :: Point -> (Transform, Shape, Style) -> Bool
-inside1 p (t,s,_) = insides (transform t p) s
-
-insides :: Point -> Shape -> Bool
-p `insides` Empty = False
-p `insides` Circle = distance p <= 1
-p `insides` Square = maxnorm  p <= 1
-
-
-distance :: Point -> Double
-distance (Vector x y ) = sqrt ( x**2 + y**2 )
-
-maxnorm :: Point -> Double
-maxnorm (Vector x y ) = max (abs x) (abs y)
-
-testShape = (scale (point 10 10), circle)
