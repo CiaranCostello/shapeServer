@@ -1,8 +1,7 @@
 module Shapes(
-  Shape(..), Point(..), Vector(..), Transform(..), Style(..), Drawing(..), Colour(..),
+  Shape(..), Point(..), Vector(..), Style(..), Drawing(..), Colour(..),
   point, getX, getY,
   empty, circle, square,
-  identity, translate, rotate, scale, (<+>),
   inside)  where
 
 
@@ -51,45 +50,29 @@ empty = Empty
 circle = Circle
 square = Square
 
--- Transformations
-
-data Transform = Identity
-           | Translate Vector
-           | Scale Vector
-           | Compose Transform Transform
-           | Rotate Matrix
-             deriving (Show, Read)
-
-identity = Identity
-translate = Translate
-scale = Scale
-rotate angle = Rotate $ matrix (cos angle) (-sin angle) (sin angle) (cos angle)
-t0 <+> t1 = Compose t0 t1
-
-transform :: Transform -> Point -> Point
-transform Identity                   x = id x
-transform (Translate (Vector tx ty)) (Vector px py)  = Vector (px - tx) (py - ty)
-transform (Scale (Vector tx ty))     (Vector px py)  = Vector (px / tx)  (py / ty)
-transform (Rotate m)                 p = (invert m) `mult` p
-transform (Compose t1 t2)            p = transform t2 $ transform t1 p
-
 -- Colour
 
 data Colour = Red
             | Green
             | Blue
+            | Purple
+            | Orange
               deriving (Read)
 
-red, green, blue :: Colour
+red, green, blue, purple, orange :: Colour
 
 red = Red
 green = Green
 blue = Blue
+purple = Purple
+orange = Orange
 
 instance Show Colour where
   show Red = "red"
   show Green = "green"
   show Blue = "blue"
+  show Orange = "orange"
+  show Purple = "purple"
 
 -- Style
 -- Stroke width, Fill colour and Stroke colour

@@ -47,9 +47,9 @@ main = scotty 3000 $ do
         H.h1 "SVG"
         H.body $ do
           interpret $ (read newDsl :: Drawing)
-          H.form ! F.action "svg/" ! F.method "POST" $ do
+          H.form ! F.action "newSvg" ! F.method "POST" $ do
             "Svg:"
-            H.input ! F.type_ "text" ! F.value "newDsl" ! F.size "200"
+            H.input ! F.type_ "text" ! F.value (S.stringValue newDsl) ! F.size "200" ! F.name "newDsl"
             H.input ! F.type_ "submit" ! F.value "Submit"
 
 
