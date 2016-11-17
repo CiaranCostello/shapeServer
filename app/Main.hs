@@ -3,6 +3,7 @@ import Web.Scotty
 import Network.Wai.Middleware.RequestLogger
 import Shapes
 import Interpret
+import Transform
 
 import qualified Text.Blaze.Html5 as H
 import qualified Text.Blaze.Html5.Attributes as F
@@ -33,7 +34,7 @@ main = scotty 3000 $ do
 
   get "/svg" $ do
       html $ R.renderHtml $ do
-        H.h1 "SVG"
+        H.h1 "Shapes DSL to SVG"
         H.body $ do
           interpret [(Identity, Circle, (Style 0 Red Blue)), (Identity, Square, (Style 0 Blue Red))]
           H.form ! F.action "newSvg" ! F.method "POST" $ do
@@ -44,7 +45,7 @@ main = scotty 3000 $ do
   post "/newSvg" $ do 
       newDsl <- param "newDsl"
       html $ R.renderHtml $ do
-        H.h1 "SVG"
+        H.h1 "Shapes DSL to SVG"
         H.body $ do
           interpret $ (read newDsl :: Drawing)
           H.form ! F.action "newSvg" ! F.method "POST" $ do
