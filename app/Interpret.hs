@@ -2,6 +2,8 @@
 
 module Interpret(interpret) where
 
+import qualified Text.Blaze.Html5 as H
+
 import Data.Matrix   (getElem, toLists)
 import Text.Blaze.Svg11 ((!), mkPath, rotate, l, m)
 import qualified Text.Blaze.Svg11 as S
@@ -19,8 +21,8 @@ interpretInner [x] = parse x
 interpretInner (x:xs) = parse x >> interpretInner xs
 
 parse :: (Transform,Shape,Style) -> S.Svg
-parse (t, Circle, s) = attributeParse S.circle (s,t) ! A.r "1" ! A.cx "0" ! A.cy "0"
-parse (t, Square, s) = attributeParse S.rect (s,t) ! A.width "1" ! A.height "1" ! A.x "0" ! A.y "0"
+parse (t, Circle, s) = attributeParse S.circle (s,t) ! A.r "1" ! A.cx "0" ! A.cy "0" ! H.customAttribute "vector-effect" "non-scaling-stroke"
+parse (t, Square, s) = attributeParse S.rect (s,t) ! A.width "1" ! A.height "1" ! A.x "0" ! A.y "0" ! H.customAttribute "vector-effect" "non-scaling-stroke"
 
 attributeParse :: S.Svg -> (Style, Transform) -> S.Svg
 attributeParse svg (s, t) = styleParse (transformParse svg t) s
