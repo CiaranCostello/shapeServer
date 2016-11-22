@@ -23,8 +23,8 @@ executable scotty-example1
                      , scotty
                      , text
                      , wai-extra
+                     , matrix
   other-modules:      Shapes
-                      , Render
                       , Ansi
                       , Interpret
                       , Transform
