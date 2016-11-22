@@ -4,7 +4,7 @@
 ```
 stack build
 stack ghci
->main
+main
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 ```
 ## DSL example
