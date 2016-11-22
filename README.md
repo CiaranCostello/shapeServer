@@ -1,5 +1,5 @@
 # Shape Server
-> A haskell scotty server with using blaze-html and blaze-svg. Displays shapes defined by the user in a DSL using the blazingly fast svg combinator library.
+> A haskell scotty server using blaze-html and blaze-svg. Displays shapes defined by the user in a DSL using the blazingly fast svg combinator library.
 ## Shape Server example
 ```
 stack build
